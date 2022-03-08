@@ -1,0 +1,6 @@
+.env
+config.json
+temp/*
+!temp/.empty
+built/*
+node_modules/*

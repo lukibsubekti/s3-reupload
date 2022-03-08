@@ -1,0 +1,38 @@
+{
+  "connection": {
+    "host": "",
+    "port": 5432,
+    "user": "",
+    "password": "",
+    "database": ""
+  },
+  "bucket": {
+    "endpoint": "xxx.yyy.zzz.com",
+    "key": "aaa",
+    "secret": "bbb",
+    "name": "mybucket"
+  },
+  "tables": [
+    {
+      "name": "article",
+      "fields": [
+        {
+          "name": "image"
+        },
+        {
+          "name": "images"
+        },
+        {
+          "name": "gallery",
+          "type": "json",
+          "prop": "detail.images"
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "searchRegex": ""
+        }
+      ]
+    }
+  ]
+}
