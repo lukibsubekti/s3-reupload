@@ -16,15 +16,18 @@ interface BucketConfig {
   name: string;
 }
 
-interface TableConfig {
+export interface TableFieldConfig {
+  name: string,
+  type?: string,
+  props?: string[],
+  searchRegex?: string
+}
+
+export interface TableConfig {
   name: string;
   primaryKey: string;
-  fields: {
-    name: string,
-    type?: string,
-    prop?: string,
-    searchRegex?: string
-  }[]
+  fields: TableFieldConfig[];
+  filterQuery?: string;
 }
 
 interface Config {

@@ -14,7 +14,28 @@
   },
   "tables": [
     {
+      "name": "CategoryCompanies",
+      "primaryKey": "_id",
+      "fields": [
+        {
+          "name": "image"
+        }
+      ]
+    },
+    {
+      "name": "EnquiryWebPromotions",
+      "primaryKey": "_id",
+      "fields": [
+        {
+          "name": "logo",
+          "type": "json",
+          "props": ["image"]
+        }
+      ]
+    },
+    {
       "name": "article",
+      "filterQuery": "where \"image\" LIKE 'https://%'",
       "fields": [
         {
           "name": "image"
@@ -25,7 +46,12 @@
         {
           "name": "gallery",
           "type": "json",
-          "prop": "detail.images"
+          "props": ["detail.images"]
+        },
+        {
+          "name": "productImages",
+          "type": "array-json",
+          "props": ["image"]
         },
         {
           "name": "description",

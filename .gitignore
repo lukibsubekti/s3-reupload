@@ -4,3 +4,4 @@ temp/*
 !temp/.empty
 built/*
 node_modules/*
+src/trials/*
