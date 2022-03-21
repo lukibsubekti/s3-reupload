@@ -1,10 +1,11 @@
 {
   "name": "s3-reupload",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "./built/index.js",
   "author": "Luki B. Subekti",
   "license": "MIT",
   "private": true,
+  "description": "Reupload files in existing database to new S3-compatible storage then update the records in the database",
   "devDependencies": {
     "@types/mime-types": "^2.1.1",
     "@types/node": "^17.0.21",
