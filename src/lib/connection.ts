@@ -7,7 +7,7 @@ let pool: Pool;
 export function initPool() {
   if (!pool) {
     const { host, port, user, password, database, ssl } = cfg.connection;
-    const connectionString = `postgres://${user}:${password}@${host}:${port}/${database}?sslmode=${ssl ? 'required' : 'disable'}`;
+    const connectionString = `postgres://${user}:${password}@${host}:${port}/${database}?sslmode=${ssl ? 'require' : 'disable'}`;
     console.log('connection:', connectionString);
     pool = new Pool({ connectionString });
   }
