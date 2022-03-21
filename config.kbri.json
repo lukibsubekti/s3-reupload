@@ -1,0 +1,147 @@
+{
+  "connection": {},
+  "bucket": {},
+  "tables": [
+    {
+      "name": "CategoryCompanies",
+      "primaryKey": "_id",
+      "fields": [
+        {
+          "name": "image"
+        }
+      ]
+    },
+    {
+      "name": "CategoryEnquiries",
+      "primaryKey": "_id",
+      "fields": [
+        {
+          "name": "icon"
+        }
+      ]
+    },
+    {
+      "name": "Companies",
+      "primaryKey": "_id",
+      "fields": [
+        {
+          "name": "logo"
+        }
+      ]
+    },
+    {
+      "name": "CompanyImages",
+      "primaryKey": "_id",
+      "fields": [
+        {
+          "name": "image"
+        }
+      ]
+    },
+    {
+      "name": "EnquiryWebPromotions",
+      "primaryKey": "_id",
+      "fields": [
+        {
+          "name": "logo",
+          "type": "json",
+          "props": ["image"]
+        },
+        {
+          "name": "productImage",
+          "type": "array-json",
+          "props": ["image"]
+        }
+      ]
+    },
+    {
+      "name": "Events",
+      "primaryKey": "_id",
+      "fields": [
+        {
+          "name": "image"
+        },
+        {
+          "name": "thumbnail"
+        }
+      ]
+    },
+    {
+      "name": "Members",
+      "primaryKey": "_id",
+      "fields": [
+        {
+          "name": "photoProfile"
+        }
+      ]
+    },
+    {
+      "name": "News",
+      "primaryKey": "_id",
+      "fields": [
+        {
+          "name": "image"
+        },
+        {
+          "name": "thumbnail"
+        }
+      ]
+    },
+    {
+      "name": "PotentialBuyers",
+      "primaryKey": "_id",
+      "fields": [
+        {
+          "name": "link"
+        }
+      ]
+    },
+    {
+      "name": "Procurements",
+      "primaryKey": "_id",
+      "fields": [
+        {
+          "name": "fileUrl"
+        }
+      ]
+    },
+    {
+      "name": "Publications",
+      "primaryKey": "_id",
+      "fields": [
+        {
+          "name": "thumbnail"
+        },
+        {
+          "name": "file"
+        }
+      ]
+    },
+    {
+      "name": "ReplyEnquiries",
+      "primaryKey": "_id",
+      "fields": [
+        {
+          "name": "attachmentFile",
+          "type": "array-json",
+          "props": [
+            "filePath",
+            "fileOriginal",
+            "fileMd",
+            "fileLg",
+            "fileSm"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "primaryKey": "_id",
+      "fields": [
+        {
+          "name": "photoProfile"
+        }
+      ]
+    }
+  ]
+}

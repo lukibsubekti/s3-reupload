@@ -78,7 +78,7 @@ There are two files that can be used for storing configuration.
           "_id": 1,
           "image": "https://mybucket.com/image.jpg",
           "user": {
-            "uuid": 69,
+            "weapon": "Jakobs Sniper Rifle",
             "profilePicture": {
               "large": "https://mybucket.com/profileLg.jpg",
               "small": "https://mybucket.com/profileSm.jpg"
@@ -137,8 +137,8 @@ There are two files that can be used for storing configuration.
 }
 ```
 
-## Future Works
+## To Do
 [ ] Support for JSON of array of URL (`json-array`)
 [ ] Support for JSON of array of JSON (`json-array-json`)
-[ ] Support for MySQL
+
         
