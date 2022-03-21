@@ -9,7 +9,7 @@ export function initPool() {
     const { host, port, user, password, database, ssl } = cfg.connection;
     const connectionString = `postgres://${user}:${password}@${host}:${port}/${database}?sslmode=${ssl ? 'require' : 'disable'}`;
     console.log('connection:', connectionString);
-    pool = new Pool({ connectionString });
+    pool = new Pool({ connectionString, ssl: { rejectUnauthorized: false } });
   }
 }
 
