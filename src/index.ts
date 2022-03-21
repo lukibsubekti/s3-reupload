@@ -163,9 +163,10 @@ function getRecordUpdatingPromise(row: any, table: TableConfig, client: PoolClie
     console.log('connection to DB success');
 
     // get records
-    const limit = 10;
+    const limit = 2;
     for (let tidx in cfg.tables) {
       const table = cfg.tables[tidx];
+      console.log('---TABLE:', table.name);
 
       let records: any[] = [];
       let offset = 0;
