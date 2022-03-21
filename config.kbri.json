@@ -98,7 +98,7 @@
     },
     {
       "name": "Procurements",
-      "primaryKey": "_id",
+      "primaryKey": "id",
       "fields": [
         {
           "name": "fileUrl"
