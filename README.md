@@ -19,6 +19,7 @@ cp ./config.sample.json ./config.json
 - It has been tested on Node 16, Typescript 4.5, and PostgreSQL 13
 - Build and run the program
 ```
+yarn
 yarn build
 yarn start
 ```
