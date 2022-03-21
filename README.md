@@ -142,7 +142,7 @@ There are two files that can be used for storing configuration.
 ```
 
 ## To Do
-[ ] Support for JSON of array of URL (`json-array`)
-[ ] Support for JSON of array of JSON (`json-array-json`)
+[ ] Support for JSON of array of URL (`json-array`)   
+[ ] Support for JSON of array of JSON (`json-array-json`)   
 
         
