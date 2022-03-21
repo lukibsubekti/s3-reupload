@@ -14,6 +14,17 @@
   },
   "tables": [
     {
+      "name": "EnquiryWebPromotions",
+      "primaryKey": "_id",
+      "fields": [
+        {
+          "name": "productImage",
+          "type": "array-json",
+          "props": ["image"]
+        }
+      ]
+    },
+    {
       "name": "CategoryCompanies",
       "primaryKey": "_id",
       "fields": [
