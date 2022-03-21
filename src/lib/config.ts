@@ -55,7 +55,7 @@ export function getConfig() {
       user: opt.user || process.env.DB_USER || 'postgres',
       password: opt.password || process.env.DB_PASSWORD || 'postgres',
       database: opt.database || process.env.DB_NAME || 'postgres',
-      ssl: typeof opt.ssl === 'boolean' ? opt.ssl : (process.env.DB_NAME && process.env.DB_NAME === 'true' ? true : false),
+      ssl: typeof opt.ssl === 'boolean' ? opt.ssl : (process.env.DB_SSL && process.env.DB_SSL === 'true' ? true : false),
     };
   } else {
     config.connection = {
@@ -64,7 +64,7 @@ export function getConfig() {
       user: process.env.DB_USER || 'postgres',
       password: process.env.DB_PASSWORD || 'postgres',
       database: process.env.DB_NAME || 'mydatabase',
-      ssl: (process.env.DB_NAME && process.env.DB_NAME === 'true' ? true : false),
+      ssl: (process.env.DB_SSL && process.env.DB_SSL === 'true' ? true : false),
     };
   }
 
