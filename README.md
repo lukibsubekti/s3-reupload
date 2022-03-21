@@ -29,7 +29,8 @@ yarn start
 1. Verify all columns and its types in the database that contain file URLs
 1. Test reuploading process for the database on your local computer first
 1. Verify the result before change the configuration for production
-1. Make sure you have enough memory and fine internet connection. Or, deploy this program on a cloud server that close to the destination storage. 
+1. Make sure you have enough memory and fine internet connection.
+1. RECOMMENDATION, Deploy this program on a cloud server that close to the destination storage 
 
 ## Configuration
 There are two files that can be used for storing configuration.
@@ -42,6 +43,7 @@ There are two files that can be used for storing configuration.
 - `DB_USER` the username for the DB access. eg. `postgres`
 - `DB_PASSWORD` password for the specified username. eg. `mypassword`
 - `DB_NAME` name of the DB. eg. `mydatabase`
+- `DB_SSL` use of SSL mode for DB connection. eg. `true`
 - `BUCKET_ENDPOINT` endpoint address of S3-compatible storage. eg. `mystorage.us-sjo1.upcloudobjects.com`
 - `BUCKET_KEY`
 - `BUCKET_SECRET`
@@ -50,10 +52,11 @@ There are two files that can be used for storing configuration.
 ### Properties of `config.json`
 - `connection` (*optional*)
   - `host`
-  - `port`
+  - `port: number`
   - `user`
   - `password`
   - `database` name of the database
+  - `ssl: true | false` 
 
 - `bucket` (*optional*)
   - `endpoint` endpoint address of S3-compatible storage
