@@ -59,11 +59,11 @@ There are two files that can be used for storing configuration.
   - `database` name of the database 
   - `ssl: true | false` 
 
-- `bucket` (*optional*)
-  - `endpoint` endpoint address of S3-compatible storage
-  - `key`
-  - `secret`
-  - `name` name of the bucket
+- `bucket` (*optional*) 
+  - `endpoint` endpoint address of S3-compatible storage 
+  - `key` 
+  - `secret` 
+  - `name` name of the bucket 
 
 - `tables` **array** of table configurations. Each configuration is represented as a JSON object with the following properties.
   - `name` name of a table. eg. `users`,
