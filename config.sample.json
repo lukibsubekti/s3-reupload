@@ -11,7 +11,9 @@
     "endpoint": "xxx.yyy.zzz.com",
     "key": "aaa",
     "secret": "bbb",
-    "name": "mybucket"
+    "name": "mybucket",
+    "resultForceHttps": true,
+    "resultBaseUrl": "https://mybucket.publichost.upcloudobjects.com"
   },
   "tables": [
     {

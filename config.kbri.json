@@ -1,6 +1,8 @@
 {
   "connection": {},
-  "bucket": {},
+  "bucket": {
+    "resultForceHttps": true
+  },
   "tables": [
     {
       "name": "CategoryCompanies",
