@@ -52,12 +52,12 @@ There are two files that can be used for storing configuration.
 
 ### Properties of `config.json`
 - `connection` (*optional*) 
-  - `host` 
-  - `port: number` 
-  - `user` 
-  - `password` 
-  - `database` name of the database 
-  - `ssl: true | false` 
+    - `host` 
+    - `port: number` 
+    - `user` 
+    - `password` 
+    - `database` name of the database 
+    - `ssl: true | false` 
 
 - `bucket` (*optional*) 
   - `endpoint` endpoint address of S3-compatible storage 
