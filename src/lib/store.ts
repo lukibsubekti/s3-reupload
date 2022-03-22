@@ -40,8 +40,15 @@ export function download(url: string): Promise<string | false> {
         return resolve(false);
       }
 
-      // get default content type
-      // let contentType = res.headers['content-type'];
+      // handle redirection
+      if ([301, 302].includes(statusCode)) {
+        if (res.headers.location) {
+          return resolve(download(res.headers.location));
+        } else {
+          console.error('Redirection without destination');
+          return resolve(false);
+        }
+      }
 
       // get body
       let buff: Buffer;
@@ -116,13 +123,29 @@ export function upload(
           removeFile(location);
         }
         return resolve(false);
-      } if (data) {
+      } 
+
+      if (data && data.Location && data.Key) {
         if (opt.clearOnSuccess) {
           // remove file
           removeFile(location);
         }
-        return resolve(data.Location);
+
+        let { Location: uploadedLocation, Key: uploadedKey } = data;
+        let finalLocation = uploadedLocation;
+
+        if (cfg.bucket.resultForceHttps && !isHttps(uploadedLocation)) {
+          finalLocation = uploadedLocation.replace(/^http:\/\//, 'https://');
+        }
+
+        if (cfg.bucket.resultBaseUrl) {
+          finalLocation = uploadedLocation.replace(new URL(uploadedLocation).origin, cfg.bucket.resultBaseUrl);
+        }
+
+        return resolve(finalLocation);
       }
+
+      return resolve(false);
     });
   });
 }

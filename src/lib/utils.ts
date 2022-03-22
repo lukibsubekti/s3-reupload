@@ -9,9 +9,7 @@ export function isUrl(str: string) {
 export function isHttps(str: string) {
   if (isUrl(str)) {
     let url = new URL(str);
-    if (url.protocol === 'https:') {
-      return true;
-    }
+    return url.protocol === 'https:';
   }
 
   return false;

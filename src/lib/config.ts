@@ -15,6 +15,8 @@ interface BucketConfig {
   key: string;
   secret: string;
   name: string;
+  resultForceHttps?: boolean;
+  resultBaseUrl?: string | false;
 }
 
 export interface TableFieldConfig {
@@ -77,6 +79,8 @@ export function getConfig() {
       key: opt.key || process.env.BUCKET_KEY || 'aaa',
       secret: opt.secret || process.env.BUCKET_SECRET || 'bbb',
       name: opt.name || process.env.BUCKET_NAME || 'mybucket',
+      resultForceHttps: opt.resultForceHttps || false,
+      resultBaseUrl: opt.resultBaseUrl || false,
     };
   } else {
     config.bucket = {
@@ -84,6 +88,8 @@ export function getConfig() {
       key: process.env.BUCKET_KEY || 'aaa',
       secret: process.env.BUCKET_SECRET || 'bbb',
       name: process.env.BUCKET_NAME || 'mybucket',
+      resultForceHttps: false,
+      resultBaseUrl: false,
     };
   }
 
