@@ -34,6 +34,7 @@ yarn start
 
 ## Configuration
 There are two files that can be used for storing configuration. 
+
 - `.env` stores database & S3 storage connection options. 
 - `config.json` stores database connection, S3 storage connection, and tables options. If database & S3 options are set here, the values stored in `.env` will be ignored. 
 
