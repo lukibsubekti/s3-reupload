@@ -51,12 +51,12 @@ There are two files that can be used for storing configuration.
 - `BUCKET_NAME` name of the bucket in the S3-compatible storage. eg. `mybucket`
 
 ### Properties of `config.json`
-- `connection` (*optional*)
-  - `host`
-  - `port: number`
-  - `user`
-  - `password`
-  - `database` name of the database
+- `connection` (*optional*) 
+  - `host` 
+  - `port: number` 
+  - `user` 
+  - `password` 
+  - `database` name of the database 
   - `ssl: true | false` 
 
 - `bucket` (*optional*)
