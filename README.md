@@ -60,41 +60,41 @@ There are two files that can be used for storing configuration.
     - `ssl: true | false` 
 
 - `bucket` (*optional*) 
-  - `endpoint` endpoint address of S3-compatible storage 
-  - `key` 
-  - `secret` 
-  - `name` name of the bucket 
+    - `endpoint` endpoint address of S3-compatible storage 
+    - `key` 
+    - `secret` 
+    - `name` name of the bucket 
 
-- `tables` **array** of table configurations. Each configuration is represented as a JSON object with the following properties.
-  - `name` name of a table. eg. `users`,
-  - `primaryKey` primary key of the table. eg. `_id`
-  - `filterQuery` (*optional*) an SQL statement as the search filter. It must be presented as **SQL-safe string** that may contain quote, double quotes, or backslah. For example:
-    - `"WHERE \"profilePicture"\ LIKE 'https://bucket%'"` 
-    - `"WHERE \"image\" IS NOT NULL"`
-    - `"WHERE \"category\" = 'rare'"`
-    - `"WHERE \"_id\" = 69"`
-  - `fields` **array** of field configurations. Each configuration is represented as a JSON object with the following properties.
-      - `name` name of the column
-      - `type` (*optional*) type of the column value. Current possible values are `json` and `array-json`. String URL or array of string URLs are auto-detected by default.
-      - `props` (*optional*) **array** of object properties for `json` and `array-json` column that contain file URL. A child property is combined with its predecessors properties using `.` (dot). 
-        For example, if the object in a column has the following value:
-        ```json
-        {
-          "_id": 1,
-          "image": "https://mybucket.com/image.jpg",
-          "user": {
-            "weapon": "Jakobs Sniper Rifle",
-            "profilePicture": {
-              "large": "https://mybucket.com/profileLg.jpg",
-              "small": "https://mybucket.com/profileSm.jpg"
+- `tables` **array** of table configurations. Each configuration is represented as a JSON object with the following properties. 
+    - `name` name of a table. eg. `users`, 
+    - `primaryKey` primary key of the table. eg. `_id` 
+    - `filterQuery` (*optional*) an SQL statement as the search filter. It must be presented as **SQL-safe string** that may contain quote, double quotes, or backslah. For example: 
+        - `"WHERE \"profilePicture"\ LIKE 'https://bucket%'"` 
+        - `"WHERE \"image\" IS NOT NULL"` 
+        - `"WHERE \"category\" = 'rare'"` 
+        - `"WHERE \"_id\" = 69"` 
+    - `fields` **array** of field configurations. Each configuration is represented as a JSON object with the following properties. 
+        - `name` name of the column 
+        - `type` (*optional*) type of the column value. Current possible values are `json` and `array-json`. String URL or array of string URLs are auto-detected by default. 
+        - `props` (*optional*) **array** of object properties for `json` and `array-json` column that contain file URL. A child property is combined with its predecessors properties using `.` (dot). 
+          For example, if the object in a column has the following value: 
+          ```json
+          {
+            "_id": 1,
+            "image": "https://mybucket.com/image.jpg",
+            "user": {
+              "weapon": "Jakobs Sniper Rifle",
+              "profilePicture": {
+                "large": "https://mybucket.com/profileLg.jpg",
+                "small": "https://mybucket.com/profileSm.jpg"
+              }
             }
           }
-        }
-        ```
-        The `props` can be set into:
-        - `["image"]` 
-        - `["image", "user.profilePicture.large"]`
-        - etc.
+          ```
+          The `props` can be set into:
+            - `["image"]` 
+            - `["image", "user.profilePicture.large"]`
+            - etc.
 
 ## Sample of a `config.json` file
 ```json
