@@ -64,8 +64,8 @@ There are two files that can be used for storing configuration.
     - `key` 
     - `secret` 
     - `name` name of the bucket 
-    - `resultForceHttps` File uploading may result in an unsecure URL address (`http:`). This property will replace the `http:` part with `https:`. 
-    - `resultBaseUrl` This property will replace the base URL (origin) of uploaded file location. For example, if this value is `https://mybucket.publichost.com` and file location is `http://mybucket.privatehost.com/myfile.pdf`, the location will be changed to `https://mybucket.publichost.com/myfile.pdf`.  
+    - `resultForceHttps: boolean` File uploading may result in an unsecure URL address (`http:`). This property will replace the `http:` part with `https:`. 
+    - `resultBaseUrl: string | false` This property will replace the base URL (origin) of uploaded file location. For example, if this value is `https://mybucket.publichost.com` and file location is `http://mybucket.privatehost.com/myfile.pdf`, the location will be changed to `https://mybucket.publichost.com/myfile.pdf`.  
 
 - `tables` **array** of table configurations. Each configuration is represented as a JSON object with the following properties. 
     - `name` name of a table. eg. `users`, 

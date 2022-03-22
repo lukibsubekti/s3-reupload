@@ -17,6 +17,7 @@ interface BucketConfig {
   name: string;
   resultForceHttps?: boolean;
   resultBaseUrl?: string | false;
+  resultDirectory?: string | false;
 }
 
 export interface TableFieldConfig {
@@ -81,6 +82,7 @@ export function getConfig() {
       name: opt.name || process.env.BUCKET_NAME || 'mybucket',
       resultForceHttps: opt.resultForceHttps || false,
       resultBaseUrl: opt.resultBaseUrl || false,
+      resultDirectory: opt.resultDirectory || false,
     };
   } else {
     config.bucket = {
@@ -90,6 +92,7 @@ export function getConfig() {
       name: process.env.BUCKET_NAME || 'mybucket',
       resultForceHttps: false,
       resultBaseUrl: false,
+      resultDirectory: false,
     };
   }
 

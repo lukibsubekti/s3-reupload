@@ -1,6 +1,6 @@
 import { get as httpGet } from 'http';
 import { get as httpsGet } from 'https';
-import { basename } from 'path';
+import { basename, join as pathJoin } from 'path';
 import { Buffer } from 'buffer';
 import { writeFile } from 'fs/promises';
 import { createReadStream, rm as fsrm } from 'fs';
@@ -101,7 +101,7 @@ export function upload(
       uploadParams.ContentType = contentType;
     }
     
-    // Configure the file stream and obtain the upload parameters
+    // configure the file stream and obtain the upload parameters
     const fileStream = createReadStream(location);
     fileStream.on('error', (err) => {
       console.error('File uploading stream error:', err);
@@ -112,7 +112,13 @@ export function upload(
       return resolve(false);
     });
     uploadParams.Body = fileStream;
-    uploadParams.Key = basename(location);
+
+    // set key
+    let fileKey = basename(location);
+    if (cfg.bucket.resultDirectory) {
+      fileKey = pathJoin(cfg.bucket.resultDirectory, fileKey);
+    }
+    uploadParams.Key = fileKey;
 
     // call S3 to retrieve upload file to specified bucket
     s3.upload(uploadParams, function (err, data) {
