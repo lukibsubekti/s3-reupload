@@ -1,5 +1,7 @@
 .env
 config.json
+config.*.json
+!config.sample.json
 temp/*
 !temp/.empty
 built/*

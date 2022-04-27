@@ -116,7 +116,7 @@ export function upload(
     // set key
     let fileKey = basename(location);
     if (cfg.bucket.resultDirectory) {
-      fileKey = pathJoin(cfg.bucket.resultDirectory, fileKey);
+      fileKey = cfg.bucket.resultDirectory + fileKey;
     }
     uploadParams.Key = fileKey;
 
