@@ -49,6 +49,27 @@
       ]
     },
     {
+      "name": "students",
+      "primaryKey": "id",
+      "fields": [
+        {
+          "name": "photos",
+          "type": "json-array"
+        }
+      ]
+    },
+    {
+      "name": "teachers",
+      "primaryKey": "id",
+      "fields": [
+        {
+          "name": "gallery",
+          "type": "json-array-object",
+          "props": ["url"]
+        }
+      ]
+    },
+    {
       "name": "article",
       "filterQuery": "where \"image\" LIKE 'https://%'",
       "fields": [
