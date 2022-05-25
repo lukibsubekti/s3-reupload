@@ -8,6 +8,12 @@ import AWS from 'aws-sdk';
 import { getConfig } from './config';
 import { isHttps, getTempFileLocation, getContentType } from './utils';
 
+type UploadOptions = {
+  clearOnFail?: boolean,
+  clearOnSuccess?: boolean,
+  originalUrl?: string,
+};
+
 const cfg = getConfig();
 
 const s3 = new AWS.S3({
@@ -84,7 +90,7 @@ export function download(url: string): Promise<string | false> {
  */
 export function upload(
   location: string,
-  opt: { clearOnFail: boolean, clearOnSuccess: boolean } = { clearOnFail: true, clearOnSuccess: true },
+  { clearOnFail = true, clearOnSuccess = true, originalUrl = undefined }: UploadOptions = {},
 ): Promise<string | false> {
   return new Promise((resolve, reject) => {
     // init upload parameters
@@ -105,7 +111,7 @@ export function upload(
     const fileStream = createReadStream(location);
     fileStream.on('error', (err) => {
       console.error('File uploading stream error:', err);
-      if (opt.clearOnFail) {
+      if (clearOnFail) {
         // remove file
         removeFile(location);
       }
@@ -114,17 +120,33 @@ export function upload(
     uploadParams.Body = fileStream;
 
     // set key
-    let fileKey = basename(location);
-    if (cfg.bucket.resultDirectory) {
-      fileKey = cfg.bucket.resultDirectory + fileKey;
+    let fileKey = '';
+    let path = '';
+    let url: URL | null = null;
+    if (originalUrl) {
+      url = new URL(originalUrl);
     }
-    uploadParams.Key = fileKey;
+
+    if (cfg.bucket.keepOriginalName && url) {
+      fileKey = basename(url.pathname);
+    } else {
+      fileKey = basename(location);
+    }
+
+    if (cfg.bucket.resultDirectory) { // forced path
+      path = cfg.bucket.resultDirectory;
+    } else if (cfg.bucket.keepOriginalPath && url) { // path based on original url
+      path = url.pathname.replace(basename(url.pathname), '').replace(/^\//, '');
+    }
+    uploadParams.Key = path + fileKey;
+    console.log('original URL:', originalUrl);
+    console.log('uploaded Key:', uploadParams.Key);
 
     // call S3 to retrieve upload file to specified bucket
     s3.upload(uploadParams, function (err, data) {
       if (err) {
         console.log('S3 uploading error:', err);
-        if (opt.clearOnFail) {
+        if (clearOnFail) {
           // remove file
           removeFile(location);
         }
@@ -132,7 +154,7 @@ export function upload(
       } 
 
       if (data && data.Location && data.Key) {
-        if (opt.clearOnSuccess) {
+        if (clearOnSuccess) {
           // remove file
           removeFile(location);
         }
@@ -171,7 +193,7 @@ export async function reupload(url: string): Promise<string | false> {
     
     // upload
     console.log('reuploading...');
-    let newUrl = await upload(location);
+    let newUrl = await upload(location, { originalUrl: url });
     if (!newUrl) {
       console.error(`File cannot be uploaded to S3. Previous location: ${location}`);
       return false;

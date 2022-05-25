@@ -18,6 +18,8 @@ interface BucketConfig {
   resultForceHttps?: boolean;
   resultBaseUrl?: string | false;
   resultDirectory?: string | false;
+  keepOriginalName?: boolean;
+  keepOriginalPath?: boolean;
 }
 
 export interface TableFieldConfig {
@@ -83,6 +85,8 @@ export function getConfig() {
       resultForceHttps: opt.resultForceHttps || false,
       resultBaseUrl: opt.resultBaseUrl || false,
       resultDirectory: opt.resultDirectory || false,
+      keepOriginalName: opt.keepOriginalName === false ? false : true,
+      keepOriginalPath: opt.keepOriginalPath === false ? false : true,
     };
   } else {
     config.bucket = {
@@ -93,6 +97,8 @@ export function getConfig() {
       resultForceHttps: false,
       resultBaseUrl: false,
       resultDirectory: false,
+      keepOriginalName: true,
+      keepOriginalPath: true,
     };
   }
 

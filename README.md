@@ -66,6 +66,9 @@ There are two files that can be used for storing configuration.
     - `name` name of the bucket 
     - `resultForceHttps: boolean` File uploading may result in an unsecure URL address (`http:`). This property will replace the `http:` part with `https:`. 
     - `resultBaseUrl: string | false` This property will replace the base URL (origin) of uploaded file location. For example, if this value is `https://mybucket.publichost.com` and file location is `http://mybucket.privatehost.com/myfile.pdf`, the location will be changed to `https://mybucket.publichost.com/myfile.pdf`.  
+    - `resultDirectory`: Force to store all uploaded files to a specific path.
+    - `keepOriginalName: boolean`: Keep original basename of a file.
+    - `keepOriginalPath: boolean`: Keep original path of a file. It will be ignored if `resultDirectory` is set.
 
 - `tables` **array** of table configurations. Each configuration is represented as a JSON object with the following properties. 
     - `name` name of a table. eg. `users`, 
@@ -146,5 +149,7 @@ There are two files that can be used for storing configuration.
 
 ## To Do
 [ ] Support for text search (`text`)   
+[ ] Custom ACL
+[ ] Custom bucket & endpoint for each file
 
         

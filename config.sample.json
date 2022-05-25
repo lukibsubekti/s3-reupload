@@ -14,7 +14,9 @@
     "name": "mybucket",
     "resultForceHttps": true,
     "resultBaseUrl": "https://mybucket.publichost.upcloudobjects.com",
-    "resultDirectory": "files/images/"
+    "resultDirectory": "files/images/",
+    "keepOriginalName": true,
+    "keepOriginalPath": false
   },
   "tables": [
     {
