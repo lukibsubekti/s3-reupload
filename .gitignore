@@ -7,3 +7,5 @@ temp/*
 built/*
 node_modules/*
 src/trials/*
+secrets/*
+!secrets/empty

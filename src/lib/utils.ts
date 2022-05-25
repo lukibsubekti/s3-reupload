@@ -50,7 +50,7 @@ export function getContentType(filepath: string) {
   return lookup(basename(filepath));
 }
 
-export function getObjectFromJson(json: any): { [prop: string]: any } | false {
+export function getObjectFromJson(json: any): { [prop: string]: any }[] | { [prop: string]: any }  | string[] | false {
   if (typeof json !== 'string') {
     return false;
   }

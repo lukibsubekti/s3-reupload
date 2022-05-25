@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  test-db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - s3-reupload-db:/var/lib/postgresql/data
+    secrets:
+      - db-password
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
+      - POSTGRES_DB=s3reupload
+
+volumes:
+  s3-reupload-db:
+
+secrets:
+  db-password:
+    file: ./secrets/db-password

@@ -1,4 +1,4 @@
-Reupload files in existing database to another S3-compatible storage then update the related records in the database.
+Reupload files in existing database to another S3-compatible storage then update the records in the database.
 
 ## How it works
 1. Read your database (PostgreSQL)
@@ -77,8 +77,8 @@ There are two files that can be used for storing configuration.
         - `"WHERE \"_id\" = 69"` 
     - `fields` **array** of field configurations. Each configuration is represented as a JSON object with the following properties. 
         - `name` name of the column 
-        - `type` (*optional*) type of the column value. Current possible values are `json` and `array-json`. String URL or array of string URLs are auto-detected by default. 
-        - `props` (*optional*) **array** of object properties for `json` and `array-json` column that contain file URL. A child property is combined with its predecessors properties using `.` (dot). 
+        - `type` (*optional*) type of the column value. Current possible values are `json`, `array-json`, `json-array`, and `json-array-object`. String URL and array of string URLs are auto-detected by default. Array of string is a built-in PostgreSQL array. If the array is encoded into JSON string, we must set the type to `json-array`.
+        - `props` (*optional*) **array** of object properties for `json`, `array-json`, and `json-array-object` column that contain file URL. A child property is combined with its predecessors properties using `.` (dot). 
           For example, if the object in a column has the following value: 
           ```json
           {
@@ -145,7 +145,6 @@ There are two files that can be used for storing configuration.
 ```
 
 ## To Do
-[ ] Support for JSON of array of URL (`json-array`)   
-[ ] Support for JSON of array of object (`json-array-object`)   
+[ ] Support for text search (`text`)   
 
         

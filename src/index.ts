@@ -67,6 +67,13 @@ async function getUpdatedJsonFieldValue(json: string, props: string[]): Promise<
   return JSON.stringify(updatedObj);
 }
 
+/**
+ * 
+ * @param row An object which is a query result 
+ * @param table Table configuration
+ * @param client 
+ * @returns 
+ */
 function getRecordUpdatingPromise(row: any, table: TableConfig, client: PoolClient) {
   let promise: Promise<boolean> = new Promise(async (resolve, reject) => {
     let fieldValues: any[] = [];
@@ -74,11 +81,13 @@ function getRecordUpdatingPromise(row: any, table: TableConfig, client: PoolClie
 
     // check each field
     for (let j in  table.fields) {
+      // get field configuration
       let field = table.fields[j];
 
       // check explicit declaration of field type
       if (field.type && ['json', 'array-json', 'text'].includes(field.type)) {
         if (field.type === 'array-json') { // Array of JSON
+          // get original field value
           const jsonArr: any = row[field.name];
 
           if (Array.isArray(jsonArr) && Array.isArray(field.props)) {
@@ -97,6 +106,7 @@ function getRecordUpdatingPromise(row: any, table: TableConfig, client: PoolClie
 
             fieldValues.push(updatedJsonArr);
           } else {
+            // if it is actually not an array, it means false configuration, then keep the original value
             fieldValues.push(jsonArr);
           }
 
@@ -118,6 +128,43 @@ function getRecordUpdatingPromise(row: any, table: TableConfig, client: PoolClie
             isChanged = true;
           }
         }
+      } else if (field.type && ['json-array', 'json-array-object'].includes(field.type)) {
+        // handle if value is string json
+        let val: string = row[field.name];
+        // if PostgreSQL data type is 'json', not 'text', it is automatically converted to object by the client lib
+        if (typeof row[field.name] === 'object') { 
+          val = JSON.stringify(val);
+        }
+        let updatedVal: string = val;
+        const arr = getObjectFromJson(val);
+
+        // if it is not array, it means false configuration, then keep the original value
+        if (Array.isArray(arr)) {
+          if (field.type === 'json-array-object') {
+            // process if only props exist
+            if (Array.isArray(field.props)) {
+              const updatedArr: any[] = [];
+
+              for (const idx in arr) {
+                const json = await getUpdatedJsonFieldValue(JSON.stringify(arr[idx]), field.props!);
+                updatedArr.push(JSON.parse(json));
+              }
+
+              updatedVal = JSON.stringify(updatedArr);
+            }
+          } else {
+            const updatedArr = await getUpdatedFieldValue(arr);
+            updatedVal = JSON.stringify(updatedArr);
+          }         
+        }
+
+        fieldValues.push(updatedVal);
+
+        // mark if any change
+        if ( val !== updatedVal ) {
+          isChanged = true;
+        }
+      
       } else {
         const val = row[field.name];
         const updatedVal = await getUpdatedFieldValue(val);
@@ -170,6 +217,8 @@ function getRecordUpdatingPromise(row: any, table: TableConfig, client: PoolClie
 
       let records: any[] = [];
       let offset = 0;
+
+      // generate SQL selection query
       let selection = [...table.fields.map((field) => '"' + field.name + '"'), '"' + table.primaryKey + '"'].join(', ');
 
       do {
